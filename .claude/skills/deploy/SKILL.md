@@ -51,3 +51,30 @@ Provide:
   ```bash
   gh pr create --title "feat: [description]" --body "[summary]"
   ```
+
+## Logging
+After deployment completes (or fails), append to the build log file (`docs/logs/BUILD-LOG-[feature-name]-[date].md`):
+```markdown
+---
+## [YYYY-MM-DD HH:MM] /deploy
+**Input:** Branch `[branch-name]`, commit `[hash]`
+**Pre-Deploy Checks:**
+- typecheck: [✅/❌]
+- lint: [✅/❌]
+- test: [✅/❌]
+- build: [✅/❌]
+**Deployment:**
+- Type: [preview / production]
+- Platform: Vercel
+- URL: [deployment URL]
+- Build warnings: [list or "None"]
+**Git:**
+- Pushed to: `origin/[branch]`
+- PR: [PR URL if created, or "N/A"]
+**Status:** [✅ deployed / ❌ failed: reason]
+
+---
+## 🏁 Pipeline Complete
+**Total Duration:** /plan → /build → /review → /fix → /deploy
+**Final URL:** [deployment URL]
+```

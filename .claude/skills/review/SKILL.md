@@ -64,3 +64,24 @@ Produce a review report:
 Each issue includes: file path, line reference, what is wrong, how to fix it.
 
 If there are Critical Issues, do NOT recommend deploying. Tell the user to run /fix.
+
+## Logging
+After producing the review report, append to the build log file (`docs/logs/BUILD-LOG-[feature-name]-[date].md`):
+```markdown
+---
+## [YYYY-MM-DD HH:MM] /review
+**Input:** `git diff main...HEAD` — [N] files changed
+**Files Reviewed:** [list of file paths]
+**Results:**
+- Critical Issues: [N]
+- Warnings: [N]
+- Suggestions: [N]
+**Issue Details:**
+| # | Severity | File | Line | Description |
+|---|----------|------|------|-------------|
+| 1 | CRITICAL | src/... | L42 | [description] |
+| 2 | WARNING  | src/... | L15 | [description] |
+**Verdict:** [PASS ✅ / NEEDS FIXES ❌]
+**Passed to next step:** [/deploy if PASS, /fix if NEEDS FIXES]
+**Status:** ✅ Review complete
+```

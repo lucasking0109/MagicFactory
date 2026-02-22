@@ -44,3 +44,40 @@ Report to the user:
 - Build status
 - Any issues encountered and how they were resolved
 - Suggest running /review before deploying
+
+## Logging (throughout the build)
+
+### Per-Step Logging
+After completing EACH implementation step in Step 3, append to the build log file (`docs/logs/BUILD-LOG-[feature-name]-[date].md`):
+```markdown
+---
+## [YYYY-MM-DD HH:MM] /build — Step [N]/[Total]: [Step description]
+**Input:** Reading plan step [N] from `PLAN-[name].md`
+**Actions:**
+1. [Created/Modified] `[file-path]` ([N] lines)
+2. Ran `pnpm typecheck` → [✅ passed / ❌ failed: error message]
+3. Ran `pnpm lint` → [✅ passed / ⚠️ N warnings / ❌ failed: error message]
+4. Ran `pnpm test` → [✅ N tests passed / ❌ N failed]
+**Errors Encountered:** [Description of any errors and how they were resolved, or "None"]
+**Git:** `[commit message]` ([commit hash])
+**Status:** [✅ completed / ⚠️ completed with warnings / ❌ blocked]
+```
+
+### Final Summary Log
+After Step 5, append a summary block:
+```markdown
+---
+## [YYYY-MM-DD HH:MM] /build — Summary
+**Total Steps:** [N]/[N] completed
+**Files Created:** [list]
+**Files Modified:** [list]
+**Final Checks:**
+- typecheck: [✅/❌]
+- lint: [✅/❌]
+- test: [✅/❌] ([N] tests)
+- build: [✅/❌]
+**Total Commits:** [N]
+**Errors Resolved During Build:** [N]
+**Passed to next step:** Feature branch ready for /review
+**Status:** [✅ build complete / ❌ build blocked]
+```

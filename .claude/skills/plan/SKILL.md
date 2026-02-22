@@ -73,3 +73,33 @@ Write a plan document to `docs/plans/PLAN-[feature-name].md` with these sections
 ## Step 4: Review with User
 Present the plan summary and ask the user to confirm before proceeding.
 Do NOT proceed to implementation. The user will invoke /build when ready.
+
+## Step 5: Write Build Log
+After the user confirms the plan, create or append to `docs/logs/BUILD-LOG-[feature-name]-[YYYY-MM-DD].md`.
+
+If the file does not exist, create it with this header:
+```markdown
+# Build Log: [feature-name]
+- **Created:** [YYYY-MM-DD HH:MM]
+- **Pipeline:** /plan → /build → /review → /deploy
+- **Branch:** feat/[feature-name]
+```
+
+Then append:
+```markdown
+---
+## [YYYY-MM-DD HH:MM] /plan
+**Input:** [Original user description]
+**Enhanced:** [Enhanced description if GPT was used, otherwise "N/A"]
+**Key Decisions:**
+1. [Architecture choice and why]
+2. [Tech/library choices and why]
+3. [Data model summary]
+**Output:** `docs/plans/PLAN-[feature-name].md`
+  - Components: [N] (Server: [N], Client: [N])
+  - Routes: [N]
+  - API endpoints: [N]
+  - Implementation steps: [N]
+**Passed to next step:** Plan file path for /build
+**Status:** ✅ Plan confirmed by user
+```

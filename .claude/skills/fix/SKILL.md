@@ -38,3 +38,37 @@ After all fixes:
 4. `pnpm build` — must succeed
 
 Report results. If all pass, suggest running /deploy.
+
+## Logging
+After each fix and after final verification, append to the build log file (`docs/logs/BUILD-LOG-[feature-name]-[date].md`):
+
+### Per-Fix Entry
+```markdown
+---
+## [YYYY-MM-DD HH:MM] /fix — Issue [N]: [short description]
+**Input:** [Error description or review issue reference]
+**Root Cause:** [What was actually wrong and why]
+**Fix Applied:**
+- File: `[file-path]` Line [N]
+- Change: [What was changed]
+**Verification:**
+- typecheck: [✅/❌]
+- lint: [✅/❌]
+- test: [✅/❌]
+**Git:** `fix: [description]` ([commit hash])
+**Status:** ✅ Fixed
+```
+
+### Final Verification Log
+```markdown
+---
+## [YYYY-MM-DD HH:MM] /fix — Final Verification
+**Total Issues Fixed:** [N]
+**Final Checks:**
+- typecheck: [✅/❌]
+- lint: [✅/❌]
+- test: [✅/❌]
+- build: [✅/❌]
+**Passed to next step:** Ready for /deploy
+**Status:** [✅ all clear / ❌ issues remain]
+```
