@@ -11,7 +11,19 @@ You are a software architect. Create a detailed plan BEFORE any code is written.
 ## Step 1: Understand the Request
 Read the user's description: $ARGUMENTS
 
-If the description is vague or missing critical details, interview the user using AskUserQuestion:
+### Auto-Enhancement
+If the description is vague (a short sentence without specific details about visual design, features, data models, or UX flow):
+1. Tell the user: "正在使用 GPT 擴展你的描述..."
+2. Run: `node ~/.claude/scripts/enhance-prompt.mjs "$ARGUMENTS"`
+3. Show the enhanced prompt to the user
+4. Say: "GPT 幫你擴展了詳細規格書（如上）。要直接使用，還是想調整？"
+5. Wait for user confirmation
+6. Use the confirmed enhanced prompt as the basis for all planning below
+
+If the script fails (no API key, network error), fall back to the interview approach below.
+
+### Interview (if still needed)
+If the description is still vague AND enhancement was skipped or failed, interview the user using AskUserQuestion:
 - Target users and use cases
 - Key features (must-have vs nice-to-have)
 - Data model (what entities exist, how they relate)
